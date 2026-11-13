@@ -5,7 +5,6 @@
 A TradingView-inspired market terminal built with Next.js, React, TypeScript, Tailwind CSS and Lightweight Charts. Dark-first, keyboard-friendly and fully functional — every control does something.
 
 > **Data disclosure:** with no provider credentials the app runs in **demo mode**. Prices, candles, sparklines and the newsroom are generated or written locally and are explicitly labelled **DEMO**. They are not real market data and must not be used for trading decisions.
-
 </div>
 
 <img width="3439" height="1439" alt="image" src="https://github.com/user-attachments/assets/cbaafaf4-5f56-4dc3-8d63-eaba9c5b2a19" />
