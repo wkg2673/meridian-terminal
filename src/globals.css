@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 220 20% 97%;
+    --surface: 0 0% 100%;
+    --surface-2: 220 18% 98.5%;
+    --elevated: 0 0% 100%;
+    --border: 220 14% 89%;
+    --border-strong: 220 12% 80%;
+    --foreground: 224 28% 10%;
+    --muted: 220 9% 44%;
+    --subtle: 220 10% 62%;
+    --brand: 223 92% 56%;
+    --brand-foreground: 0 0% 100%;
+    --brand-muted: 223 92% 96%;
+    --bullish: 158 74% 32%;
+    --bearish: 356 72% 47%;
+    --warning: 32 90% 42%;
+    --chart-grid: rgba(15, 23, 42, 0.055);
+    --chart-text: #59626f;
+    --chart-crosshair: rgba(15, 23, 42, 0.32);
+    --chart-tooltip-bg: rgba(255, 255, 255, 0.96);
+    --scrollbar-thumb: rgba(15, 23, 42, 0.16);
+    --scrollbar-thumb-hover: rgba(15, 23, 42, 0.28);
+    color-scheme: light;
+  }
+
+  .dark {
+    /* Dark theme — default */
+    --background: 220 13% 5%;
+    --surface: 220 12% 7.2%;
+    --surface-2: 220 11% 9%;
+    --elevated: 220 10% 11%;
+    --border: 220 9% 15.5%;
+    --border-strong: 220 8% 24%;
+    --foreground: 220 14% 94%;
+    --muted: 220 8% 58%;
+    --subtle: 220 7% 46%;
+    --brand: 223 92% 64%;
+    --brand-foreground: 0 0% 100%;
+    --brand-muted: 223 60% 16%;
+    --bullish: 156 72% 44%;
+    --bearish: 356 78% 58%;
+    --warning: 38 92% 56%;
+    --chart-grid: rgba(255, 255, 255, 0.045);
+    --chart-text: #7c8695;
+    --chart-crosshair: rgba(255, 255, 255, 0.3);
+    --chart-tooltip-bg: rgba(18, 20, 24, 0.96);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.13);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.22);
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: hsl(var(--brand) / 0.28);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--brand) / 0.65);
+    outline-offset: 2px;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum", "cv11";
+  }
+
+  .panel {
+    @apply rounded-xl border border-border bg-surface;
+  }
+
+  .hairline {
+    @apply border-border/70;
+  }
+
+  .label-caps {
+    @apply text-2xs font-medium uppercase tracking-[0.08em] text-subtle;
+  }
+
+  .scroll-fade {
+    mask-image: linear-gradient(to bottom, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-foreground/[0.055];
+  }
+
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-foreground/[0.07] to-transparent;
+    animation: shimmer 1.8s infinite;
+  }
+
+  .chart-tooltip {
+    background: var(--chart-tooltip-bg);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-link-active {
+    @apply text-foreground;
+  }
+
+  .hotkey {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded border border-border bg-surface-2 px-1 font-mono text-2xs text-muted;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grid-lines {
+    background-image: linear-gradient(to right, hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+/* Scrollbars — slim, terminal-grade */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Lightweight Charts overrides */
+.tv-lightweight-charts table {
+  border-collapse: collapse;
+}
+
+/* Radix scroll area */
+[data-radix-scroll-area-viewport] {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
