@@ -759,7 +759,6 @@ export function PriceChart({ className }: { className?: string }) {
     if (tool === "cursor") return;
     const pixel = panePoint(event);
     const point = toPoint(pixel.x, pixel.y);
-    console.debug("[drawing]", { tool, pixel, point });
     if (!point) return;
 
     if (tool === "horizontal" || tool === "vertical") {
